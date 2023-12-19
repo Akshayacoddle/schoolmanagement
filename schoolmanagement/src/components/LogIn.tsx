@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
   const BASE = process.env.REACT_APP_BASE_URL;
   const HandleLogin = async () => {
@@ -14,7 +13,6 @@ function LogIn() {
         "Content-Type": "application/json",
       },
     });
-
     let results = await result.json();
 
     if (results.success === true) {
