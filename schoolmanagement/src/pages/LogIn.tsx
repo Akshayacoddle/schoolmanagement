@@ -1,27 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ulrcalling from "../components/ulrcalling";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const BASE = process.env.REACT_APP_BASE_URL;
-  const HandleLogin = async () => {
-    let result = await fetch(`${BASE}/teacher/login`, {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    let results = await result.json();
-
-    if (results.success === true) {
-      const token = JSON.stringify(results.jwtToken);
-      localStorage.setItem("jwttoken", token);
-      navigate("/");
-    } else {
-      alert("invalid username or password");
-    }
+  const HandleLogin = async (e: unknown) => {
+    ulrcalling(`${BASE}/teacher/login`, { email, password }, "POST").then(
+      (data) => {
+        if (data.success === true) {
+          const token = JSON.stringify(data.jwtToken);
+          localStorage.setItem("jwttoken", token);
+          localStorage.setItem("islogged", "true");
+          navigate("/");
+        } else {
+          alert("invalid username or password");
+        }
+      }
+    );
   };
   return (
     <>
@@ -33,6 +30,7 @@ function LogIn() {
                 Home
               </a>
             </li>
+
             <li>
               <a href="/login">Login</a>
             </li>

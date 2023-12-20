@@ -32,27 +32,27 @@ ul {
     background-color: rgb(82, 122, 148);  
     color: white;  
   }  
-.container {
+  .container {
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 140px;
     background-color: #efefef;
     padding-bottom: 30px;
     width: 525px;
+    border-radius: 40px;
 }
-.header{
+.header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 9px;
     width: 100%;
-    margin-top: 25px;
-    font-size: 15px;
+    margin-top: 10px;
 }
 .text {
     color: #9BB8CD;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .underline{
@@ -61,18 +61,18 @@ ul {
     background-color:#9BB8CD ;
     border-radius: 9px;
 }
-.inputs{
+.inputs {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
 }
 .input {
     display: flex;
     align-items: center;
     margin: auto;
-    width: 400px;
-    height: 60px;
+    width: 402px;
+    height: 50px;
     background-color: #dddddd;
     border-radius: 2px;
 }
@@ -80,17 +80,17 @@ ul {
     margin: 0px 30px;
     color:#50585f ;
 }
-.input input{
+.input input {
     height: 50px;
-    width: 400px;
+    width: 100%;
     background: transparent;
     border: none;
     color: #7c7979;
-    font-size: 19px;
+    font-size: 15px;
 }
-button {
+.inputs button {
     margin: auto;
-    width: 400px;
+    width: 402px;
     height: 40px;
     background-color: #8ca6b2;
     color: white;
