@@ -6,8 +6,6 @@ function LogIn() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(localStorage.getItem("jwttoken"));
-
     if (localStorage.getItem("jwttoken")) navigate("/");
   }, [navigate]);
   const BASE = process.env.REACT_APP_BASE_URL;
