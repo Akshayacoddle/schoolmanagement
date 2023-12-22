@@ -1,24 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ulrcalling from "../components/ulrcalling";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    console.log(localStorage.getItem("jwttoken"));
+
+    if (localStorage.getItem("jwttoken")) navigate("/");
+  }, [navigate]);
   const BASE = process.env.REACT_APP_BASE_URL;
-  const HandleLogin = async (e: unknown) => {
-    ulrcalling(`${BASE}/teacher/login`, { email, password }, "POST").then(
-      (data) => {
-        if (data.success === true) {
-          const token = JSON.stringify(data.jwtToken);
-          localStorage.setItem("jwttoken", token);
-          localStorage.setItem("islogged", "true");
-          navigate("/");
-        } else {
-          alert("invalid username or password");
-        }
+  const HandleLogin = (e: unknown) => {
+    ulrcalling(`${BASE}/teacher/login`, { email, password }).then((data) => {
+      if (data.success === true) {
+        const token = JSON.stringify(data.jwtToken);
+        localStorage.setItem("jwttoken", token);
+        localStorage.setItem("islogged", "true");
+        navigate("/");
+      } else {
+        alert("invalid username or password");
       }
-    );
+    });
   };
   return (
     <>

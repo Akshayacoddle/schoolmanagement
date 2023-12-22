@@ -1,6 +1,6 @@
-const ulrcalling = async (url: string = "", data = {}, method: string) => {
+const ulrcalling = async (url: string, data = {}) => {
   const result = await fetch(url, {
-    method: method,
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -9,4 +9,5 @@ const ulrcalling = async (url: string = "", data = {}, method: string) => {
   });
   return result.json();
 };
+
 export default ulrcalling;

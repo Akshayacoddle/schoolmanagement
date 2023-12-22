@@ -2,31 +2,34 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ulrcalling from "../components/ulrcalling";
 function Signup() {
+  const intialVal = "1998-12-09";
   const [name, setName] = useState("");
-  const [dateOfBirth, setDob] = useState("");
+  const [date, setDate] = useState(intialVal);
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [dateOfJoin, setDateofjoin] = useState("");
+  const [join, setJoin] = useState(intialVal);
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
+  const handleDateChange = (event: any) => {
+    setDate(event.target.value);
+  };
+  const handlejoinDateChange = (event: any) => {
+    setJoin(event.target.value);
+  };
   const BASE = process.env.REACT_APP_BASE_URL;
   const HandleSignup = async () => {
-    ulrcalling(
-      `${BASE}/teacher/register`,
-      {
-        name,
-        dateOfBirth,
-        gender,
-        email,
-        password,
-        address,
-        dateOfJoin,
-        status,
-      },
-      "POST"
-    ).then((data) => {
+    ulrcalling(`${BASE}/teacher/register`, {
+      name,
+      date,
+      gender,
+      email,
+      password,
+      address,
+      join,
+      status,
+    }).then((data) => {
       let results = data;
       console.log(results);
       if (!data.success) {
@@ -65,10 +68,9 @@ function Signup() {
           <div className="input">
             <input
               type="date"
-              name="dateOfBirth"
-              placeholder="Date-of-Birth"
-              onChange={(e) => setDob(e.target.value)}
-              value={dateOfBirth}
+              name="date"
+              onChange={handleDateChange}
+              value={date}
             />
             <input
               type="text"
@@ -107,10 +109,10 @@ function Signup() {
           <div className="input">
             <input
               type="date"
-              name="dateOfJoin"
+              name="join"
               placeholder="Date of Join"
-              onChange={(e) => setDateofjoin(e.target.value)}
-              value={dateOfJoin}
+              onChange={handlejoinDateChange}
+              value={join}
             />
             <input
               type="text"
