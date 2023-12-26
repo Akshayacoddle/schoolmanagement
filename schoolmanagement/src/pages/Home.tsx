@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 function Home() {
   const navigate = useNavigate();
   const HandleClick = async (e: { preventDefault: () => void }) => {

@@ -2,8 +2,16 @@
 body {
   margin: 0;
   height: 100vh;
- background: linear-gradient(#164863,#FFF7D4);
+  
  
+}
+.img{
+  
+  background-image: url(school2.jpg);
+  padding: 120px;
+  background-size: cover;
+
+
 }
 ul {  
     list-style-type: none;  
@@ -37,7 +45,7 @@ ul {
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 140px;
+    margin-top: 100px;
     background-color: #efefef;
     padding-bottom: 30px;
     width: 525px;
