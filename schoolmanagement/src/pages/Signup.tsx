@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ulrcalling from "../components/urlcalling";
+import { ChangeEvent } from "react";
 type User = {
   name: string;
   date: string;
@@ -23,7 +24,7 @@ function Signup() {
     status: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
