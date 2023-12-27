@@ -42,11 +42,12 @@ ul {
     color: white;  
   }  
   .container {
+    opacity: 0.8;
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 100px;
-    background-color: #efefef;
+    background-color: #0c0808;
     padding-bottom: 30px;
     width: 525px;
     border-radius: 40px;
@@ -104,4 +105,20 @@ ul {
     background-color: #8ca6b2;
     color: white;
     font-size: 20px;
+}
+.containerexam .body {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.containerexam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.examdiv {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 20px;
 }

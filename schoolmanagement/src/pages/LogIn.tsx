@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ulrcalling from "../components/ulrcalling";
+import ulrcalling from "../components/urlcalling";
+type Users = {
+  email: string;
+  password: string;
+};
 function LogIn() {
-  const initialvalues = {
-    name: "",
-    date: "",
-    gender: "",
+  const [data, setData] = useState<Users>({
     email: "",
     password: "",
-    address: "",
-    join: "",
-    status: "",
-  };
-  const [data, setData] = useState(initialvalues);
+  });
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
@@ -24,6 +21,8 @@ function LogIn() {
   const BASE = process.env.REACT_APP_BASE_URL;
   const HandleLogin = (e: unknown) => {
     ulrcalling(`${BASE}/teacher/login`, "POST", data).then((data) => {
+      console.log(data);
+
       if (data.success === true) {
         const token = JSON.stringify(data.jwtToken);
         localStorage.setItem("jwttoken", token);

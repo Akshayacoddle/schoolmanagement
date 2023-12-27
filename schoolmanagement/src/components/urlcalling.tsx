@@ -1,15 +1,14 @@
 interface User {
-  name: string;
-  date: string;
-  gender: string;
+  name?: string;
+  date?: string;
+  gender?: string;
   email: string;
   password: string;
-  address: string;
-  join: string;
-  status: string;
+  address?: string;
+  join?: string;
+  status?: string;
 }
-
-const ulrcalling = async (url: string, method: string, data: User) => {
+const urlcalling = async (url: string, method: string, data: User) => {
   console.log(url);
   const result = await fetch(url, {
     method: method,
@@ -23,4 +22,4 @@ const ulrcalling = async (url: string, method: string, data: User) => {
   return result.json();
 };
 
-export default ulrcalling;
+export default urlcalling;

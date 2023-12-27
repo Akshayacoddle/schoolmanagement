@@ -1,0 +1,50 @@
+
+.home_div{
+    position: relative;
+    display: flex;
+    background-image: url(../../home.jpg);
+    background-size: cover;
+    height: 550px;
+    z-index: 0;
+
+}
+.head{
+    margin: auto;
+    z-index: 1;
+    width: 600px;
+    text-align: center;  
+    color: #ffffff;
+}
+.home_div h1 {
+    
+    z-index: 1;
+    font-size: 3rem;
+}
+
+.overlap{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000000;
+    opacity: .4;
+
+}
+.home_div p {
+    margin: auto;
+    width: 600px;
+    text-align: center;
+}
+.second {
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 400px;
+    gap: 25px;
+    padding: 80px;
+}
+.second-division {
+    background-color: rgba(102, 172, 40, 0.792);
+    text-align: center;
+}
