@@ -63,13 +63,9 @@
     color: #525d92;
     text-align: center;
 }
-.thirdhead p {
-    font-size: 20px;
-    color: #444447;
-}
 .define h3 {
     font-size: 21px;
-    color: #667e4edb;
+    color: #437bcadb;
 }
 .thirdcontent {
     display: grid;
@@ -98,4 +94,28 @@
 }
 .forthdiv h3 {
     text-align: center;
+}
+.thirdhead p {
+    font-size: 20px;
+    padding: 0 200px;
+    color: #444447;
+}
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin: 0 150px;
+}
+footer {
+    background-color: #d2d2d2;
+    margin-top: 100px;
+}
+.icons {
+    width: 40px;
+    display: flex;
+    gap: 15px;
+    padding-top: 22px;
+}
+img {
+    width: 100%;
+    height: 100%;
 }
