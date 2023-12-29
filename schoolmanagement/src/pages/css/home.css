@@ -106,8 +106,9 @@
     margin: 0 150px;
 }
 footer {
-    background-color: #d2d2d2;
-    margin-top: 100px;
+    background-color: rgb(72 107 118);
+    margin-top: 150px;
+    color: white;
 }
 .icons {
     width: 40px;
@@ -118,4 +119,11 @@ footer {
 img {
     width: 100%;
     height: 100%;
+}
+.hallticket {
+    margin-top: 66px;
+}
+.examdiv .class11 {
+    padding: 10px;
+    font-size: 17px;
 }

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import ulrcalling from "../components/urlcalling";
-import { ChangeEvent } from "react";
 type Users = {
   email: string;
   password: string;
@@ -11,7 +10,7 @@ function LogIn() {
     email: "",
     password: "",
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
@@ -26,7 +25,10 @@ function LogIn() {
 
       if (data.success === true) {
         const token = JSON.stringify(data.jwtToken);
-        localStorage.setItem("jwttoken", token);
+        const cleanedToken = token.replace(/^"|"$/g, "");
+        console.log(cleanedToken);
+
+        localStorage.setItem("jwttoken", cleanedToken);
         localStorage.setItem("islogged", "true");
         navigate("/");
       } else {
@@ -57,7 +59,6 @@ function LogIn() {
       </nav>
       <div className="img">
         <div className="container">
-          <img src="school.png" alt="" />
           <div className="header">
             <div className="text">LogIn</div>
             <div className="underline"></div>

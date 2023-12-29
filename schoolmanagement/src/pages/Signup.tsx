@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import ulrcalling from "../components/urlcalling";
-import { ChangeEvent } from "react";
 type User = {
   name: string;
   date: string;
@@ -24,7 +23,7 @@ function Signup() {
     status: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
@@ -53,7 +52,7 @@ function Signup() {
         </div>
       </nav>
       <div className="img">
-        <div className="container">
+        <div className="signupcontainer">
           <div className="header">
             <div className="text">SignUp</div>
             <div className="underline"></div>
