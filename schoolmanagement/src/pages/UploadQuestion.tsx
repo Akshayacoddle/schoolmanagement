@@ -1,38 +1,50 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+interface question {
+  question: File | null;
+}
+
 function UploadQuestion() {
-  const url = "http://localhost:5001/exam/classid";
-  const [data, setData] = useState([]);
+  const [question, setQuestion] = useState<File | null>(null);
 
-  const fetchInfo = () => {
-    console.log(axios.get(url).then((res) => setData(res.data)));
-
-    return axios.get(url).then((res) => setData(res.data));
+  const submitImage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("question", question!);
+    const result = await axios.post(
+      "http://localhost:5001/exam/questions",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + localStorage.getItem("jwttoken"),
+        },
+      }
+    );
+  };
+  const onInputChange = (e: any) => {
+    console.log(e.target.files[0]);
+    setQuestion(e.target.files[0]);
   };
 
-  useEffect(() => {
-    fetchInfo();
-  }, []);
-
   return (
-    <div className="App">
-      <h1 style={{ color: "green" }}>using Axios Library to Fetch Data</h1>
-      <center>
-        return (
-        <div
-          style={{
-            width: "15em",
-            backgroundColor: "#CD8FFD",
-            padding: 2,
-            borderRadius: 10,
-            marginBlock: 10,
-          }}
-        >
-          <p style={{ fontSize: 20, color: "white" }}></p>
+    <>
+      <Navbar />
+      <div className="containerexam hallticket">
+        <div className="body">
+          <h1>Upload Question paper</h1>
+          <div>
+            <form onSubmit={submitImage}>
+              <input type="file" onChange={onInputChange} />
+              <button>upload</button>
+            </form>
+          </div>
         </div>
-        );
-      </center>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
 export default UploadQuestion;

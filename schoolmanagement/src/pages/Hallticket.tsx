@@ -79,6 +79,7 @@ function Hallticket() {
               id="class1"
               className="class11"
               onChange={(e) => setSelectedClassId(e.target.value)}
+              defaultValue={selectedClassId}
             >
               {classIdValues.map((option) => (
                 <option value={option.value}>{option.label}</option>

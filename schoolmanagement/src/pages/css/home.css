@@ -127,3 +127,7 @@ img {
     padding: 10px;
     font-size: 17px;
 }
+.examdiv .btn {
+    background-color: #468e46bf;
+    color: white;
+}

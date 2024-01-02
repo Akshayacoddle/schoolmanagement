@@ -9,8 +9,17 @@ interface User {
   status?: string;
   classIdResult?: ClassItem[];
   examTypeResult?: ExamTypeItem[];
+  academicYearResult?: AcademicYearItem[];
+  roomIdResult?: RoomItem[];
+  subjectIdResult?: SubjectItem[];
   classId?: string | number;
   examType?: string | number;
+  room?: string | number;
+  subject?: string | number;
+  academicYear?: string | number;
+  examName?: string | number;
+  startDate?: string | number;
+  endDate?: string | number;
 }
 type ClassItem = {
   id: number;
@@ -21,6 +30,19 @@ type ExamTypeItem = {
   id: number;
   type: string;
 };
+type AcademicYearItem = {
+  academic_year: number;
+};
+
+type RoomItem = {
+  id: number;
+  name: string;
+};
+type SubjectItem = {
+  id: number;
+  name: string;
+};
+
 const urlcalling = async (url: string, method: string, data: User) => {
   console.log(url);
   const result = await fetch(url, {
