@@ -1,37 +1,38 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import ulrcalling from "../components/ulrcalling";
+import ulrcalling from "../components/urlcalling";
+type User = {
+  name: string;
+  date: string;
+  gender: string;
+  email: string;
+  password: string;
+  address: string;
+  join: string;
+  status: string;
+};
 function Signup() {
-  const intialVal = "1998-12-09";
-  const [name, setName] = useState("");
-  const [date, setDate] = useState(intialVal);
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [join, setJoin] = useState(intialVal);
-  const [status, setStatus] = useState("");
+  const [data, setData] = useState<User>({
+    name: "",
+    date: "",
+    gender: "",
+    email: "",
+    password: "",
+    address: "",
+    join: "",
+    status: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
+
   const navigate = useNavigate();
-  const handleDateChange = (event: any) => {
-    setDate(event.target.value);
-  };
-  const handlejoinDateChange = (event: any) => {
-    setJoin(event.target.value);
-  };
   const BASE = process.env.REACT_APP_BASE_URL;
   const HandleSignup = async () => {
-    ulrcalling(`${BASE}/teacher/register`, {
-      name,
-      date,
-      gender,
-      email,
-      password,
-      address,
-      join,
-      status,
-    }).then((data) => {
-      let results = data;
-      console.log(results);
+    ulrcalling(`${BASE}/teacher/register`, "POST", data).then((data) => {
+      console.log(!data.success);
       if (!data.success) {
         alert("already registered");
       } else {
@@ -50,81 +51,71 @@ function Signup() {
           </ul>
         </div>
       </nav>
-      <div className="container">
-        <div className="header">
-          <div className="text">SignUp</div>
-          <div className="underline"></div>
-        </div>
-        <div className="inputs">
-          <div className="input">
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
+      <div className="img">
+        <div className="signupcontainer">
+          <div className="header">
+            <div className="text">SignUp</div>
+            <div className="underline"></div>
           </div>
-          <div className="input">
-            <input
-              type="date"
-              name="date"
-              onChange={handleDateChange}
-              value={date}
-            />
-            <input
-              type="text"
-              name="gender"
-              placeholder="Gender"
-              onChange={(e) => setGender(e.target.value)}
-              value={gender}
-            />
-          </div>
-          <div className="input">
-            <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </div>
+          <div className="inputs">
+            <div className="input">
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="input">
+              <input type="date" name="date" onChange={handleChange} />
+              <input
+                type="text"
+                name="gender"
+                placeholder="Gender"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="input">
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="input">
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              onChange={(e) => setAddress(e.target.value)}
-              value={address}
-            />
+            <div className="input">
+              <input
+                type="text"
+                name="address"
+                placeholder="Address"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="input">
+              <input
+                type="date"
+                name="join"
+                placeholder="Date of Join"
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="status"
+                placeholder="status"
+                onChange={handleChange}
+              />
+            </div>
+            <button onClick={HandleSignup} value="signup">
+              Submit
+            </button>
           </div>
-          <div className="input">
-            <input
-              type="date"
-              name="join"
-              placeholder="Date of Join"
-              onChange={handlejoinDateChange}
-              value={join}
-            />
-            <input
-              type="text"
-              name="status"
-              placeholder="status"
-              onChange={(e) => setStatus(e.target.value)}
-              value={status}
-            />
-          </div>
-          <button type="submit" onClick={HandleSignup}>
-            Submit
-          </button>
         </div>
       </div>
     </>

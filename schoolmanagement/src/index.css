@@ -2,17 +2,24 @@
 body {
   margin: 0;
   height: 100vh;
- background: linear-gradient(#164863,#FFF7D4);
+  
  
 }
-ul {  
-    list-style-type: none;  
-    margin: 0;  
-    padding: 0px;  
-    overflow: hidden;  
-    background-color: rgb(124 124 124); 
-  }  
-    
+.img{
+  
+  background-image: url(school2.jpg);
+  padding: 120px;
+  background-size: cover;
+
+
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0px;
+  overflow: hidden;
+  background-color: rgb(72 107 118);
+} 
   li {  
     float: left;  
   }  
@@ -34,14 +41,23 @@ ul {
     color: white;  
   }  
   .container {
+    opacity: 0.8;
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 140px;
-    background-color: #efefef;
+    margin-top: 100px;
+    background-color: #0c0808;
     padding-bottom: 30px;
     width: 525px;
     border-radius: 40px;
+}
+.signupcontainer {
+  opacity: 0.8;
+  margin: auto;
+  background-color: #0c0808;
+  padding-bottom: 30px;
+  width: 525px;
+  border-radius: 40px;
 }
 .header {
     display: flex;
@@ -96,4 +112,20 @@ ul {
     background-color: #8ca6b2;
     color: white;
     font-size: 20px;
+}
+.containerexam .body {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.containerexam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.examdiv {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 20px;
 }

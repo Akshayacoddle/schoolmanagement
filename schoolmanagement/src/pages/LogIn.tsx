@@ -1,21 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import ulrcalling from "../components/ulrcalling";
+import ulrcalling from "../components/urlcalling";
+type Users = {
+  email: string;
+  password: string;
+};
 function LogIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState<Users>({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(localStorage.getItem("jwttoken"));
-
     if (localStorage.getItem("jwttoken")) navigate("/");
   }, [navigate]);
   const BASE = process.env.REACT_APP_BASE_URL;
   const HandleLogin = (e: unknown) => {
-    ulrcalling(`${BASE}/teacher/login`, { email, password }).then((data) => {
+    ulrcalling(`${BASE}/teacher/login`, "POST", data).then((data) => {
+      console.log(data);
+
       if (data.success === true) {
         const token = JSON.stringify(data.jwtToken);
-        localStorage.setItem("jwttoken", token);
+        const cleanedToken = token.replace(/^"|"$/g, "");
+        console.log(cleanedToken);
+
+        localStorage.setItem("jwttoken", cleanedToken);
         localStorage.setItem("islogged", "true");
         navigate("/");
       } else {
@@ -23,6 +36,7 @@ function LogIn() {
       }
     });
   };
+
   return (
     <>
       <nav className="navbar navbar-inverse">
@@ -43,33 +57,31 @@ function LogIn() {
           </ul>
         </div>
       </nav>
-      <div className="container">
-        <div className="header">
-          <div className="text">LogIn</div>
-          <div className="underline"></div>
-        </div>
-        <div className="inputs">
-          <div className="input">
-            <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
+      <div className="img">
+        <div className="container">
+          <div className="header">
+            <div className="text">LogIn</div>
+            <div className="underline"></div>
           </div>
-          <div className="input">
-            <input
-              type="password"
-              name="pass"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
+          <div className="inputs">
+            <div className="input">
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="input">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+              />
+            </div>
+            <button onClick={HandleLogin}>login</button>
           </div>
-          <button onClick={HandleLogin} type="submit">
-            login
-          </button>
         </div>
       </div>
     </>
