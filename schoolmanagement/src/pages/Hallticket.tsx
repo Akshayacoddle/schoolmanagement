@@ -82,7 +82,9 @@ function Hallticket() {
               defaultValue={selectedClassId}
             >
               {classIdValues.map((option) => (
-                <option value={option.value}>{option.label}</option>
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
               ))}
             </select>
           </div>
@@ -94,7 +96,9 @@ function Hallticket() {
               onChange={(e) => setSelectedExamType(e.target.value)}
             >
               {examTypeValues.map((option) => (
-                <option value={option.value}>{option.label}</option>
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
               ))}
             </select>
           </div>

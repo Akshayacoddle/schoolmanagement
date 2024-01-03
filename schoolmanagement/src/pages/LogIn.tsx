@@ -25,7 +25,7 @@ function LogIn() {
 
       if (data.success === true) {
         const token = JSON.stringify(data.jwtToken);
-        const cleanedToken = token.replace(/^"|"$/g, "");
+        const cleanedToken = token.replace(/['"]+/g, "");
         console.log(cleanedToken);
 
         localStorage.setItem("jwttoken", cleanedToken);

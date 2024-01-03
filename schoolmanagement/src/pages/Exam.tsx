@@ -47,9 +47,7 @@ function Exam() {
     startDate: "",
     endtDate: "",
   });
-  const [selectedAcademicYear, setsSlectedAcademicYear] = useState<
-    number | string
-  >();
+  const [academic, setAcademic] = useState<number | string>();
   const [examName, setExamName] = useState<string>();
   const [startDate, setStartDate] = useState<string>();
   const [endDate, setEndDate] = useState<number | string>();
@@ -103,7 +101,7 @@ function Exam() {
   }));
   const handlesubmits = async () => {
     const requestDatas = {
-      academicYear: selectedAcademicYear,
+      academicYear: academic,
       classes: selectedClassId,
       examType: selectedExam,
       room: selectedRoom,
@@ -150,7 +148,9 @@ function Exam() {
             >
               <option value="undefined">select...</option>
               {classIdValues.map((value) => (
-                <option value={value.label}>{value.value}</option>
+                <option key={value.label} value={value.label}>
+                  {value.value}
+                </option>
               ))}
             </select>
           </div>
@@ -163,7 +163,9 @@ function Exam() {
             >
               <option value="undefined">select...</option>
               {subjectIdValues.map((value) => (
-                <option value={value.label}>{value.value}</option>
+                <option key={value.label} value={value.label}>
+                  {value.value}
+                </option>
               ))}
             </select>
           </div>
@@ -176,7 +178,9 @@ function Exam() {
             >
               <option value="undefined">select...</option>
               {roomIdValues.map((value, i) => (
-                <option value={value.label}>{value.value}</option>
+                <option key={value.label} value={value.label}>
+                  {value.value}
+                </option>
               ))}
             </select>
           </div>
@@ -185,11 +189,13 @@ function Exam() {
             <select
               id="year"
               className="class11"
-              onChange={(e) => setsSlectedAcademicYear(e.target.value)}
+              onChange={(e) => setAcademic(e.target.value)}
             >
               <option value="undefined">select...</option>
               {academicYearValues.map((value) => (
-                <option value={value}>{value}</option>
+                <option key={value} value={value}>
+                  {value}
+                </option>
               ))}
             </select>
           </div>
@@ -203,7 +209,9 @@ function Exam() {
             >
               <option value="undefined">select...</option>
               {examTypeValues.map((value) => (
-                <option value={value.label}>{value.value}</option>
+                <option key={value.label} value={value.label}>
+                  {value.value}
+                </option>
               ))}
             </select>
           </div>
