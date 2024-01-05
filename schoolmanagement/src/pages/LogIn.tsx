@@ -14,6 +14,9 @@ function LogIn() {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
+  const slogin = () => {
+    localStorage.setItem("user", "student");
+  };
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("jwttoken")) navigate("/");
@@ -38,53 +41,41 @@ function LogIn() {
   };
 
   return (
-    <>
-      <nav className="navbar navbar-inverse">
-        <div className="container-fluid">
-          <ul>
-            <li>
-              <a className="active" href="/">
-                Home
-              </a>
-            </li>
-
-            <li>
-              <a href="/login">Login</a>
-            </li>
-            <li>
-              <a href="/signup">Signup</a>
-            </li>
-          </ul>
+    <div className="img">
+      <div className="container">
+        <div className="header">
+          <div className="text">LogIn</div>
+          <div className="underline"></div>
         </div>
-      </nav>
-      <div className="img">
-        <div className="container">
-          <div className="header">
-            <div className="text">LogIn</div>
-            <div className="underline"></div>
+        <div className="inputs">
+          <div className="input">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+            />
           </div>
-          <div className="inputs">
-            <div className="input">
-              <input
-                type="text"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="input">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-              />
-            </div>
-            <button onClick={HandleLogin}>login</button>
+          <div className="input">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+          </div>
+          <button onClick={HandleLogin}>login</button>
+          <div className="linkselect">
+            <a href="/signup" className="sigup">
+              Signup
+            </a>
+            <a href="/login" className="sigup" onClick={slogin}>
+              student login
+            </a>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default LogIn;

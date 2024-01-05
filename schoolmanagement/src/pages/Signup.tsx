@@ -41,84 +41,78 @@ function Signup() {
     });
   };
   return (
-    <>
-      <nav className="navbar navbar-inverse">
-        <div className="container-fluid">
-          <ul>
-            <li>
-              <a href="/login">Login</a>{" "}
-            </li>
-          </ul>
+    <div className="img">
+      <div className="signupcontainer">
+        <div className="header">
+          <div className="text">SignUp</div>
+          <div className="underline"></div>
         </div>
-      </nav>
-      <div className="img">
-        <div className="signupcontainer">
-          <div className="header">
-            <div className="text">SignUp</div>
-            <div className="underline"></div>
+        <div className="inputs">
+          <div className="input">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              onChange={handleChange}
+            />
           </div>
-          <div className="inputs">
-            <div className="input">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="input">
-              <input type="date" name="date" onChange={handleChange} />
-              <input
-                type="text"
-                name="gender"
-                placeholder="Gender"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="input">
-              <input
-                type="text"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-              />
-            </div>
+          <div className="input">
+            <input type="date" name="date" onChange={handleChange} />
+            <input
+              type="text"
+              name="gender"
+              placeholder="Gender"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+          </div>
 
-            <div className="input">
-              <input
-                type="text"
-                name="address"
-                placeholder="Address"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="input">
-              <input
-                type="date"
-                name="join"
-                placeholder="Date of Join"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="status"
-                placeholder="status"
-                onChange={handleChange}
-              />
-            </div>
-            <button onClick={HandleSignup} value="signup">
-              Submit
-            </button>
+          <div className="input">
+            <input
+              type="text"
+              name="address"
+              placeholder="Address"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="date"
+              name="join"
+              placeholder="Date of Join"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              name="status"
+              placeholder="status"
+              onChange={handleChange}
+            />
+          </div>
+          <button onClick={HandleSignup} value="signup">
+            Submit
+          </button>
+          <div className="linkselect">
+            <a href="/login" className="login">
+              Login
+            </a>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default Signup;

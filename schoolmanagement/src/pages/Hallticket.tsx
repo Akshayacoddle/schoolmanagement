@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
+import admincard from "../admincard.png";
 
-type ExamData = {
-  classIdResult: ClassItem[];
-  examTypeResult: ExamTypeItem[];
-};
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUserInfo } from "../redux/reduxApi";
 type ClassItem = {
   id: number;
   grade: string;
@@ -18,40 +17,14 @@ type ExamTypeItem = {
 };
 
 function Hallticket() {
-  const [examData, setExamData] = useState<ExamData>({
-    classIdResult: [],
-    examTypeResult: [],
-  });
-
+  const { data } = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
   const [selectedClassId, setSelectedClassId] = useState<number | string>();
   const [selectedExamType, setSelectedExamType] = useState<number | string>();
 
   useEffect(() => {
-    const url = "http://localhost:5001/exam/classid";
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-
-        const { classIdResult, examTypeResult } = data.message;
-
-        setExamData({
-          classIdResult,
-          examTypeResult,
-        });
-      });
-  }, []);
-
-  const classIdValues = examData.classIdResult.map((item) => ({
-    value: item.id,
-    label: item.grade,
-  }));
-
-  const examTypeValues = examData.examTypeResult.map((item) => ({
-    value: item.id,
-    label: item.type,
-  }));
-
+    dispatch(fetchUserInfo() as any);
+  }, [dispatch]);
   const handlesubmit = async () => {
     const requestData = {
       classes: selectedClassId,
@@ -81,9 +54,10 @@ function Hallticket() {
               onChange={(e) => setSelectedClassId(e.target.value)}
               defaultValue={selectedClassId}
             >
-              {classIdValues.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+              <option value="undefined">select...</option>
+              {data.message?.classIdResult.map((value: ClassItem) => (
+                <option key={value.id} value={value.id}>
+                  {value.grade}
                 </option>
               ))}
             </select>
@@ -95,9 +69,10 @@ function Hallticket() {
               className="class11"
               onChange={(e) => setSelectedExamType(e.target.value)}
             >
-              {examTypeValues.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+              <option value="undefined">select...</option>
+              {data.message?.examTypeResult.map((value: ExamTypeItem) => (
+                <option key={value.id} value={value.id}>
+                  {value.type}
                 </option>
               ))}
             </select>
@@ -107,6 +82,9 @@ function Hallticket() {
               Submit
             </button>
           </div>
+        </div>
+        <div className="sideimg">
+          <img src={admincard} alt="" />
         </div>
       </div>
       <Footer />

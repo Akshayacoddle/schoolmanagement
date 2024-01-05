@@ -13,7 +13,6 @@ import Sports from "../sports.jpg";
 import Kindness from "../kindness.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
 function Home() {
   const navigate = useNavigate();
 

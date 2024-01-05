@@ -1,41 +1,26 @@
+import Images from "../question.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-interface Question {
-  question: File | null;
-}
-type Exam = {
-  examResult: exam[];
-};
+
+import { useSelector, useDispatch } from "react-redux";
+import { fetchQuestionInfo } from "../redux/reduxApi";
+
 type exam = {
   name: string;
   id: number;
 };
 function UploadQuestion() {
+  const { data } = useSelector((state: any) => state.question);
+  console.log(data);
+
+  const dispatch = useDispatch();
   const [question, setQuestion] = useState<File | null>(null);
-  const [exam, setExam] = useState<Exam>({
-    examResult: [],
-  });
   const [exams, setExams] = useState<string>();
   useEffect(() => {
-    const url = "http://localhost:5001/exam/examname";
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        const { examResult } = data.message;
-        console.log(examResult);
-        setExam({
-          examResult,
-        });
-      });
-  }, []);
-
-  const examValues = exam.examResult.map((item) => ({
-    value: item.id,
-    label: item.name,
-  }));
+    dispatch(fetchQuestionInfo() as any);
+  }, [dispatch]);
 
   const submitImage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,9 +64,9 @@ function UploadQuestion() {
                   onChange={(e) => setExams(e.target.value)}
                 >
                   <option value="">Select...</option>
-                  {examValues.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
+                  {data.message?.examResult.map((option: exam) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
                     </option>
                   ))}
                 </select>
@@ -91,7 +76,11 @@ function UploadQuestion() {
             </form>
           </div>
         </div>
+        <div className="sideimg">
+          <img src={Images} alt="" />
+        </div>
       </div>
+
       <Footer />
     </>
   );
