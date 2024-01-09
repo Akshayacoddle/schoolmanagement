@@ -13,6 +13,7 @@ import Sports from "../sports.jpg";
 import Kindness from "../kindness.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import NavbarAdmin from "../components/NavbarAdmin";
 function Home() {
   const navigate = useNavigate();
 
@@ -22,7 +23,8 @@ function Home() {
 
   return (
     <>
-      <Navbar />
+      {localStorage.getItem("role") === "user" && <Navbar />}
+      {localStorage.getItem("role") === "admin" && <NavbarAdmin />}
       <div className="home_div">
         <div className="overlap"></div>
         <div className="head">

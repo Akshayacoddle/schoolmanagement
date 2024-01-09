@@ -1,6 +1,6 @@
 import "./css/home.css";
-import { useEffect, useState, ChangeEvent } from "react";
-import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
+import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
 import Images from "../examschedule.png";
@@ -52,7 +52,6 @@ function Exam() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handlesubmits = async () => {
     const BASE = process.env.REACT_APP_BASE_URL;
     urlcalling(`${BASE}/exam/shedule`, "POST", formData).then((data) => {

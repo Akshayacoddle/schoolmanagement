@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
 import admincard from "../admincard.png";
@@ -52,7 +52,6 @@ function Hallticket() {
               id="class1"
               className="class11"
               onChange={(e) => setSelectedClassId(e.target.value)}
-              defaultValue={selectedClassId}
             >
               <option value="undefined">select...</option>
               {data.message?.classIdResult.map((value: ClassItem) => (

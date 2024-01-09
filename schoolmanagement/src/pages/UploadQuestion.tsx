@@ -1,7 +1,7 @@
 import Images from "../question.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -44,7 +44,6 @@ function UploadQuestion() {
       });
   };
   const onInputChange = (e: any) => {
-    console.log(e.target.files[0]);
     setQuestion(e.target.files[0]);
   };
 

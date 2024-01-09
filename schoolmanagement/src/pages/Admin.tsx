@@ -5,7 +5,7 @@ type Users = {
   email: string;
   password: string;
 };
-function LogIn() {
+function AdminLogIn() {
   const [data, setData] = useState<Users>({
     email: "",
     password: "",
@@ -14,13 +14,15 @@ function LogIn() {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
+
   const navigate = useNavigate();
   useEffect(() => {
+    console.log(window.location.pathname);
     if (localStorage.getItem("jwttoken")) navigate("/");
   }, [navigate]);
   const BASE = process.env.REACT_APP_BASE_URL;
   const HandleLogin = (e: unknown) => {
-    ulrcalling(`${BASE}/student/login`, "POST", data).then((data) => {
+    ulrcalling(`${BASE}/teacher/login`, "POST", data).then((data) => {
       console.log(data);
 
       if (data.success === true) {
@@ -28,7 +30,7 @@ function LogIn() {
         const cleanedToken = token.replace(/['"]+/g, "");
         localStorage.setItem("jwttoken", cleanedToken);
         localStorage.setItem("islogged", "true");
-        localStorage.setItem("role", "user");
+        localStorage.setItem("role", "admin");
         navigate("/");
       } else {
         alert("invalid username or password");
@@ -40,7 +42,7 @@ function LogIn() {
     <div className="img">
       <div className="container">
         <div className="header">
-          <div className="text">LogIn</div>
+          <div className="text">Admin LogIn</div>
           <div className="underline"></div>
         </div>
         <div className="inputs">
@@ -65,8 +67,8 @@ function LogIn() {
             <a href="/signup" className="sigup">
               Signup
             </a>
-            <a href="/admin" className="sigup">
-              Admin login
+            <a href="/login" className="sigup">
+              student login
             </a>
           </div>
         </div>
@@ -74,4 +76,4 @@ function LogIn() {
     </div>
   );
 }
-export default LogIn;
+export default AdminLogIn;

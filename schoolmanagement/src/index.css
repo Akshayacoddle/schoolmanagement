@@ -105,13 +105,13 @@ ul {
     color: #7c7979;
     font-size: 15px;
 }
-.inputs button{
-    margin: auto;
-    width: 402px;
-    height: 40px;
-    background-color: #8ca6b2;
-    color: white;
-    font-size: 20px;
+.inputs button {
+  margin: auto;
+  width: 402px;
+  height: 40px;
+  background-color: #1a5e7d;
+  color: white;
+  font-size: 20px;
 }
 .containerexam .body {
   width: 500px;

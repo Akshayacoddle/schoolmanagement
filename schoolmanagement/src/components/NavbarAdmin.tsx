@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-function Navbar() {
+function NavbarAdmin() {
   const navigate = useNavigate();
   const HandleClick = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -14,13 +14,13 @@ function Navbar() {
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/feedback">FeedBack</a>
+            <a href="/exam">Exam Shedule</a>
           </li>
           <li>
-            <a href="/">Time Table</a>
+            <a href="/uploadquestion">Upload Question paper</a>
           </li>
           <li>
-            <a href="/hallticket">HallTicket</a>
+            <a href="/hallticket">Generate Hall Ticket</a>
           </li>
           <li>
             <a onClick={HandleClick} href="/login">
@@ -32,4 +32,4 @@ function Navbar() {
     </nav>
   );
 }
-export default Navbar;
+export default NavbarAdmin;

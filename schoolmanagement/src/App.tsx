@@ -5,6 +5,11 @@ import Signup from "./pages/Signup";
 import Exam from "./pages/Exam";
 import Question from "./pages/UploadQuestion";
 import Hallticket from "./pages/Hallticket";
+import Feedback from "./pages/Feedback";
+import AdminLogIn from "./pages/Admin";
+
+const CURRENT_USER_TYPE = localStorage.getItem("role");
+
 function App() {
   return (
     <div className="app">
@@ -12,11 +17,50 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/exam" element={<Exam />} />
-        <Route path="/uploadquestion" element={<Question />} />
-        <Route path="/hallticket" element={<Hallticket />} />
+        <Route
+          path="/exam"
+          element={
+            <AdminElement>
+              <Exam />
+            </AdminElement>
+          }
+        />
+        <Route
+          path="/uploadquestion"
+          element={
+            <AdminElement>
+              <Question />
+            </AdminElement>
+          }
+        />
+        <Route
+          path="/hallticket"
+          element={
+            <AdminElement>
+              <Hallticket />
+            </AdminElement>
+          }
+        />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/admin" element={<AdminLogIn />} />
+        <Route path="*" element={<div>Page not found !</div>} />
       </Routes>
     </div>
   );
+}
+interface Element {
+  children: React.ReactNode;
+}
+
+function AdminElement({ children }: Readonly<Element>) {
+  if (CURRENT_USER_TYPE === "admin") {
+    return <>{children}</>;
+  } else {
+    return (
+      <div>
+        <h1>You don't have permission to access</h1>
+      </div>
+    );
+  }
 }
 export default App;
