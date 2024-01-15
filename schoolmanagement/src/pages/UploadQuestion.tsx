@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
-
 import { useSelector, useDispatch } from "react-redux";
 import { fetchQuestionInfo } from "../redux/reduxApi";
 
@@ -12,10 +11,11 @@ type exam = {
   id: number;
 };
 function UploadQuestion() {
+  const dispatch = useDispatch();
+
   const { data } = useSelector((state: any) => state.question);
   console.log(data);
 
-  const dispatch = useDispatch();
   const [question, setQuestion] = useState<File | null>(null);
   const [exams, setExams] = useState<string>();
   useEffect(() => {
@@ -27,8 +27,9 @@ function UploadQuestion() {
     const formData = new FormData();
     formData.append("question", question!);
     formData.append("exam", exams!);
+    const BASE = process.env.REACT_APP_BASE_URL;
     await axios
-      .post("http://localhost:5001/exam/questions", formData, {
+      .post(`${BASE}/exam/questions`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: "Bearer " + localStorage.getItem("jwttoken"),
@@ -50,6 +51,7 @@ function UploadQuestion() {
   return (
     <>
       <Navbar />
+
       <div className="containerexam hallticket">
         <div className="body">
           <h1>Upload Question paper</h1>

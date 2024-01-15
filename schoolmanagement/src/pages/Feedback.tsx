@@ -1,10 +1,11 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-
+import feedback from "../feedback.webp";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserInfo } from "../redux/reduxApi";
 import { useEffect, useState } from "react";
 import urlcalling from "../components/urlcalling";
+import { setexamData } from "../redux/redux";
+import { RootState } from "../redux/store";
 
 type teacher = {
   id: number;
@@ -19,7 +20,8 @@ type ClassItem = {
   grade: string;
 };
 function Feedback() {
-  const { data } = useSelector((state: any) => state.user);
+  const examdata = useSelector((exam: RootState) => exam.exam.examData);
+  console.log(examdata);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
@@ -29,10 +31,22 @@ function Feedback() {
     aboutTeacher: "",
     aboutSchool: "",
   });
-
+  const BASE = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
-    dispatch(fetchUserInfo() as any);
-  }, [dispatch]);
+    const url = `${BASE}/exam/classid`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const { classIdResult, subjectIdResult, teacherResult } = data.message;
+        dispatch(
+          setexamData({
+            classIdResult,
+            subjectIdResult,
+            teacherResult,
+          })
+        );
+      });
+  }, []);
   const handleChange = async (event: any) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -75,7 +89,7 @@ function Feedback() {
               onChange={handleChange}
             >
               <option value="undefined">select...</option>
-              {data.message?.classIdResult.map((value: ClassItem) => (
+              {examdata?.classIdResult.map((value: ClassItem) => (
                 <option key={value.id} value={value.id}>
                   {value.grade}
                 </option>
@@ -91,7 +105,7 @@ function Feedback() {
               onChange={handleChange}
             >
               <option value="undefined">select...</option>
-              {data.message?.teacherResult.map((value: teacher) => (
+              {examdata?.teacherResult.map((value: teacher) => (
                 <option key={value.id} value={value.id}>
                   {value.name}
                 </option>
@@ -107,7 +121,7 @@ function Feedback() {
               onChange={handleChange}
             >
               <option value="undefined">select...</option>
-              {data.message?.subjectIdResult.map((value: SubjectItem) => (
+              {examdata?.subjectIdResult.map((value: SubjectItem) => (
                 <option key={value.id} value={value.id}>
                   {value.name}
                 </option>
@@ -138,6 +152,10 @@ function Feedback() {
               Submit
             </button>
           </div>
+        </div>
+        <div className="sideimg">
+          <h1>FeedBack</h1>
+          <img src={feedback} alt="" />
         </div>
       </div>
       <Footer />

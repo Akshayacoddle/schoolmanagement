@@ -4,34 +4,32 @@ import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
 import Images from "../examschedule.png";
+import { useDispatch, useSelector } from "react-redux";
+import { setexamData } from "../redux/redux";
 
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUserInfo } from "../redux/reduxApi";
-type AcademicYear = {
-  academic_year: string;
+type AcademicYearItem = {
+  academic_year: number;
 };
 type ClassItem = {
   id: number;
   grade: string;
 };
-
 type ExamTypeItem = {
   id: number;
   type: string;
 };
-
 type RoomItem = {
   id: number;
   name: string;
 };
-
 type SubjectItem = {
   id: number;
   name: string;
 };
 
 function Exam() {
-  const { data } = useSelector((state: any) => state.user);
+  const examdata = useSelector((exam: any) => exam.exam.examData);
+  console.log(examdata);
 
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -41,22 +39,41 @@ function Exam() {
     selectedRoom: "",
     academic: "",
     selectedExam: "",
-    startDate: "",
-    endDate: "",
+    startDates: "",
+    endDates: "",
   });
-
-  useEffect(() => {
-    dispatch(fetchUserInfo() as any);
-  }, [dispatch]);
   const handleChange = async (event: any) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+  const BASE = process.env.REACT_APP_BASE_URL;
+  useEffect(() => {
+    const url = `${BASE}/exam/classid`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const {
+          academicYearResult,
+          classIdResult,
+          examTypeResult,
+          roomIdResult,
+          subjectIdResult,
+        } = data.message;
+        dispatch(
+          setexamData({
+            academicYearResult,
+            classIdResult,
+            examTypeResult,
+            roomIdResult,
+            subjectIdResult,
+          })
+        );
+      });
+  }, []);
+
   const handlesubmits = async () => {
     const BASE = process.env.REACT_APP_BASE_URL;
     urlcalling(`${BASE}/exam/shedule`, "POST", formData).then((data) => {
-      console.log(data);
-
       if (!data.success) {
         alert("Some issue occurred");
       } else {
@@ -75,15 +92,20 @@ function Exam() {
               className="class11"
               type="text"
               id="examname"
-              name="fname"
+              name="examName"
               onChange={handleChange}
             />
           </div>
           <div className="examdiv">
             <label>Select Class:</label>
-            <select id="class1" className="class11" onChange={handleChange}>
+            <select
+              name="selectedClassId"
+              id="class1"
+              className="class11"
+              onChange={handleChange}
+            >
               <option value="undefined">select...</option>
-              {data.message?.classIdResult.map((value: ClassItem) => (
+              {examdata?.classIdResult.map((value: ClassItem) => (
                 <option key={value.id} value={value.id}>
                   {value.grade}
                 </option>
@@ -92,9 +114,14 @@ function Exam() {
           </div>
           <div className="examdiv">
             <label>Select Subject:</label>
-            <select id="subject" className="class11" onChange={handleChange}>
+            <select
+              name="selectedSubject"
+              id="subject"
+              className="class11"
+              onChange={handleChange}
+            >
               <option value="undefined">select...</option>
-              {data.message?.subjectIdResult.map((value: SubjectItem) => (
+              {examdata?.subjectIdResult.map((value: SubjectItem) => (
                 <option key={value.id} value={value.id}>
                   {value.name}
                 </option>
@@ -103,9 +130,14 @@ function Exam() {
           </div>
           <div className="examdiv">
             <label>select Room:</label>
-            <select id="room" className="class11" onChange={handleChange}>
+            <select
+              name="selectedRoom"
+              id="room"
+              className="class11"
+              onChange={handleChange}
+            >
               <option value="undefined">select...</option>
-              {data.message?.roomIdResult.map((value: RoomItem) => (
+              {examdata?.roomIdResult.map((value: RoomItem) => (
                 <option key={value.id} value={value.id}>
                   {value.name}
                 </option>
@@ -114,9 +146,14 @@ function Exam() {
           </div>
           <div className="examdiv">
             <label>Academic Year:</label>
-            <select id="year" className="class11" onChange={handleChange}>
+            <select
+              name="academic"
+              id="year"
+              className="class11"
+              onChange={handleChange}
+            >
               <option value="undefined">select...</option>
-              {data.message?.academicYearResult.map((value: AcademicYear) => (
+              {examdata?.academicYearResult.map((value: AcademicYearItem) => (
                 <option key={value.academic_year} value={value.academic_year}>
                   {value.academic_year}
                 </option>
@@ -127,12 +164,12 @@ function Exam() {
             <label>Exam Type:</label>
             <select
               id="type"
-              name="type"
+              name="selectedExam"
               className="class11"
               onChange={handleChange}
             >
               <option value="undefined">select...</option>
-              {data.message?.examTypeResult.map((value: ExamTypeItem) => (
+              {examdata?.examTypeResult.map((value: ExamTypeItem) => (
                 <option key={value.id} value={value.id}>
                   {value.type}
                 </option>
@@ -145,7 +182,7 @@ function Exam() {
               className="class11"
               type="datetime-local"
               id="startdate"
-              name="startdate"
+              name="startDates"
               onChange={handleChange}
             />
           </div>
@@ -154,8 +191,8 @@ function Exam() {
             <input
               className="class11"
               type="datetime-local"
-              id="lastdate"
-              name="lastdate"
+              id="endDates"
+              name="endDates"
               onChange={handleChange}
             />
           </div>

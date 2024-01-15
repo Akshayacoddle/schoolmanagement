@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userInfo, questionInfo } from "./reduxApi";
+import examReducer from "./redux";
 
 export const store = configureStore({
   reducer: {
-    user: userInfo.reducer,
-    question: questionInfo.reducer,
+    exam: examReducer,
   },
 });
+export type RootState = ReturnType<typeof store.getState>;
