@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import feedback from "../feedback.webp";
+import feedback from "../images/feedback.webp";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import urlcalling from "../components/urlcalling";

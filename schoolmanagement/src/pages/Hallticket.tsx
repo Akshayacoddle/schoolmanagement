@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
-import admincard from "../admincard.png";
+import admincard from "../images/admincard.png";
 import { useSelector, useDispatch } from "react-redux";
 import { setexamData } from "../redux/redux";
 import { RootState } from "../redux/store";

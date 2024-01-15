@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/NavbarAdmin";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
-import Images from "../examschedule.png";
+import Images from "../images/examschedule.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setexamData } from "../redux/redux";
 

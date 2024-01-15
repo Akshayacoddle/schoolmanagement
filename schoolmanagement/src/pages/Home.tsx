@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Learn from "../learn.webp";
-import Lead from "../lead.jpg";
-import Success from "../success.webp";
-import Security from "../sa.png";
-import Certified from "../certified.png";
-import Class from "../class.jpg";
-import Regular from "../regular.png";
-import Creative from "../creative.jpg";
-import Sports from "../sports.jpg";
+import Learn from "../images/learn.webp";
+import Lead from "../images/lead.jpg";
+import Success from "../images/success.webp";
+import Security from "../images/sa.png";
+import Certified from "../images/certified.png";
+import Class from "../images/class.jpg";
+import Regular from "../images/regular.png";
+import Creative from "../images/creative.jpg";
+import Sports from "../images/sports.jpg";
 
-import Kindness from "../kindness.jpg";
+import Kindness from "../images/kindness.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NavbarAdmin from "../components/NavbarAdmin";

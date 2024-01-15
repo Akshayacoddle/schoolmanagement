@@ -1,4 +1,4 @@
-import Images from "../question.png";
+import Images from "../images/question.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/NavbarAdmin";

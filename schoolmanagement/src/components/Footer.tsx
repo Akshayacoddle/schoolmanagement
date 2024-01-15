@@ -1,6 +1,6 @@
-import Facebook from "../facebook.jpg";
-import Instagram from "../instagram.jpg";
-import Twiter from "../twitter.jpeg";
+import Facebook from "../images/facebook.jpg";
+import Instagram from "../images/instagram.jpg";
+import Twiter from "../images/twitter.jpeg";
 function Footer() {
   return (
     <footer>
