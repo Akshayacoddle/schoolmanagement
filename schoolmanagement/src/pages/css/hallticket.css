@@ -1,0 +1,12 @@
+.roomseat {
+    display: grid;
+    text-align: end;
+}
+.subjects {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}
+.halltickets {
+    margin: 50px 100px;
+}

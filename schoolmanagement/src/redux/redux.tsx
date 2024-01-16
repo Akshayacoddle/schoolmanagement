@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 export const examSlice = createSlice({
-  name: "exam",
+  name: "values",
   initialState: {
     examData: {
       classIdResult: [],

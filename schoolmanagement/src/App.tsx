@@ -7,6 +7,7 @@ import Question from "./pages/UploadQuestion";
 import Hallticket from "./pages/Hallticket";
 import Feedback from "./pages/Feedback";
 import AdminLogIn from "./pages/Admin";
+import ViewHallticket from "./pages/ViewHallticket";
 
 const CURRENT_USER_TYPE = localStorage.getItem("role");
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/view" element={<ViewHallticket />} />
         <Route
           path="/exam"
           element={

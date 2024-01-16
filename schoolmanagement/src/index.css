@@ -24,7 +24,7 @@ ul {
     float: left;  
   }  
     
-  li a {  
+  li a,button {  
     display: block;  
     color: rgb(236, 236, 243);  
    font-size:20px;  
@@ -32,6 +32,10 @@ ul {
     padding: 10px 20px;  
     text-decoration: none;  
   }  
+  button.logoutbtn {
+    background: none;
+    border: 0px;
+}
   .active{  
   background-color: #666666;  
   color: white;  

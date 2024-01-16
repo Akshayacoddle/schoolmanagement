@@ -1,32 +1,37 @@
 import Images from "../images/question.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "../components/NavbarAdmin";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchQuestionInfo } from "../redux/reduxApi";
 
+type Exam = {
+  examResult: exam[];
+};
 type exam = {
   name: string;
   id: number;
 };
 function UploadQuestion() {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state: any) => state.question);
-  console.log(data);
-
   const [question, setQuestion] = useState<File | null>(null);
-  const [exams, setExams] = useState<string>();
+  const [exams, setExams] = useState<Exam>();
+  const BASE = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
-    dispatch(fetchQuestionInfo() as any);
-  }, [dispatch]);
-
+    const url = `${BASE}/exam/examname`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        const { examResult } = data.message;
+        setExams({
+          examResult,
+        });
+      });
+  }, []);
   const submitImage = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("question", question!);
-    formData.append("exam", exams!);
+    //formData.append("exam", exams!);
     const BASE = process.env.REACT_APP_BASE_URL;
     await axios
       .post(`${BASE}/exam/questions`, formData, {
@@ -62,10 +67,10 @@ function UploadQuestion() {
                 <select
                   id="class1"
                   className="class11"
-                  onChange={(e) => setExams(e.target.value)}
+                  //onChange={(e) => setExams(e.target.value)}
                 >
                   <option value="">Select...</option>
-                  {data.message?.examResult.map((option: exam) => (
+                  {exams?.examResult.map((option: exam) => (
                     <option key={option.id} value={option.id}>
                       {option.name}
                     </option>

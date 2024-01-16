@@ -1,11 +1,12 @@
 import "./css/home.css";
 import { useEffect, useState } from "react";
-import Navbar from "../components/NavbarAdmin";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
 import Images from "../images/examschedule.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setexamData } from "../redux/redux";
+import { RootState } from "../redux/store";
 
 type AcademicYearItem = {
   academic_year: number;
@@ -28,7 +29,7 @@ type SubjectItem = {
 };
 
 function Exam() {
-  const examdata = useSelector((exam: any) => exam.exam.examData);
+  const examdata = useSelector((values: RootState) => values.exam.examData);
   console.log(examdata);
 
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/NavbarAdmin";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import urlcalling from "../components/urlcalling";
 import admincard from "../images/admincard.png";
@@ -16,7 +16,7 @@ type ExamTypeItem = {
   type: string;
 };
 function Hallticket() {
-  const examdata = useSelector((exam: RootState) => exam.exam.examData);
+  const examdata = useSelector((value: RootState) => value.exam.examData);
   console.log(examdata);
 
   const dispatch = useDispatch();

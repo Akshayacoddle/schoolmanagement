@@ -1,7 +1,14 @@
+// Navbar.js
+import React from "react";
 import { useNavigate } from "react-router-dom";
-function Navbar() {
+import withConditionalNavItems from "./withNavbar";
+interface NavbarProps {
+  navItems: { [key: string]: string };
+}
+
+function Navbar({ navItems }: Readonly<NavbarProps>) {
   const navigate = useNavigate();
-  const HandleClick = async (e: { preventDefault: () => void }) => {
+  const handleLogout = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     localStorage.clear();
     navigate("/login");
@@ -11,25 +18,22 @@ function Navbar() {
       <div className="container-fluid">
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a href="/"> Home</a>
           </li>
+          {Object.entries(navItems).map(([label, path]) => (
+            <li key={label}>
+              <a href={path}>{label}</a>
+            </li>
+          ))}
           <li>
-            <a href="/feedback">FeedBack</a>
-          </li>
-          <li>
-            <a href="/">Time Table</a>
-          </li>
-          <li>
-            <a href="/hallticket">HallTicket</a>
-          </li>
-          <li>
-            <a onClick={HandleClick} href="/login">
+            <button className="logoutbtn" onClick={handleLogout}>
               Logout
-            </a>
+            </button>
           </li>
         </ul>
       </div>
     </nav>
   );
 }
-export default Navbar;
+
+export default withConditionalNavItems(Navbar);
