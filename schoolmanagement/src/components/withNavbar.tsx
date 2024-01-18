@@ -1,7 +1,7 @@
 import React from "react";
 
 const withConditionalNavItems = (WrappedComponent: any) => {
-  return function ConditionalNavItems(props: any) {
+  return function ConditionalNavItems() {
     const role = localStorage.getItem("role");
     const navItems =
       role === "admin"
@@ -14,7 +14,7 @@ const withConditionalNavItems = (WrappedComponent: any) => {
             Feedback: "/feedback",
             "View Hall Ticket": "/view",
           };
-    return <WrappedComponent {...props} navItems={navItems} />;
+    return <WrappedComponent navItems={navItems} />;
   };
 };
 

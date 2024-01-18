@@ -6,7 +6,6 @@ import Exam from "./pages/Exam";
 import Question from "./pages/UploadQuestion";
 import Hallticket from "./pages/Hallticket";
 import Feedback from "./pages/Feedback";
-import AdminLogIn from "./pages/Admin";
 import ViewHallticket from "./pages/ViewHallticket";
 
 const CURRENT_USER_TYPE = localStorage.getItem("role");
@@ -44,7 +43,7 @@ function App() {
           }
         />
         <Route path="/feedback" element={<Feedback />} />
-        <Route path="/admin" element={<AdminLogIn />} />
+        <Route path="/admin" element={<LogIn />} />
         <Route path="*" element={<div>Page not found !</div>} />
       </Routes>
     </div>

@@ -31,21 +31,17 @@ function Feedback() {
     aboutTeacher: "",
     aboutSchool: "",
   });
-  const BASE = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
-    const url = `${BASE}/exam/classid`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const { classIdResult, subjectIdResult, teacherResult } = data.message;
-        dispatch(
-          setexamData({
-            classIdResult,
-            subjectIdResult,
-            teacherResult,
-          })
-        );
-      });
+    urlcalling(`/exam/classid`, "GET").then((data) => {
+      const { classIdResult, subjectIdResult, teacherResult } = data.message;
+      dispatch(
+        setexamData({
+          classIdResult,
+          subjectIdResult,
+          teacherResult,
+        })
+      );
+    });
   }, []);
   const handleChange = async (event: any) => {
     const { name, value } = event.target;
@@ -53,9 +49,7 @@ function Feedback() {
   };
   const handlesubmits = () => {
     console.log(formData);
-
-    const BASE = process.env.REACT_APP_BASE_URL;
-    urlcalling(`${BASE}/student/feedback`, "POST", formData).then((data) => {
+    urlcalling(`/student/feedback`, "POST", formData).then((data) => {
       console.log(data);
 
       if (!data.success) {

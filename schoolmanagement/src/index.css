@@ -24,7 +24,7 @@ ul {
     float: left;  
   }  
     
-  li a,button {  
+  li a,.logoutbtn {  
     display: block;  
     color: rgb(236, 236, 243);  
    font-size:20px;  
@@ -109,13 +109,19 @@ ul {
     color: #7c7979;
     font-size: 15px;
 }
-.inputs button {
+.inputs .button {
   margin: auto;
   width: 402px;
   height: 40px;
   background-color: #1a5e7d;
   color: white;
   font-size: 20px;
+}
+button.sigup {
+  padding: 10px 0px;
+  background: none;
+  color: white;
+  border: 2px solid white;
 }
 .containerexam .body {
   width: 500px;

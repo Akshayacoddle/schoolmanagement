@@ -29,9 +29,8 @@ function Signup() {
   };
 
   const navigate = useNavigate();
-  const BASE = process.env.REACT_APP_BASE_URL;
   const HandleSignup = async () => {
-    ulrcalling(`${BASE}/teacher/register`, "POST", data).then((data) => {
+    ulrcalling(`/teacher/register`, "POST", data).then((data) => {
       console.log(!data.success);
       if (!data.success) {
         alert("already registered");

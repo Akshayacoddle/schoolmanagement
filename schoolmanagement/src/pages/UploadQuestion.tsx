@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import urlcalling from "../components/urlcalling";
 
 type Exam = {
   examResult: exam[];
@@ -13,25 +14,24 @@ type exam = {
 };
 function UploadQuestion() {
   const [question, setQuestion] = useState<File | null>(null);
-  const [exams, setExams] = useState<Exam>();
-  const BASE = process.env.REACT_APP_BASE_URL;
+  const [exam, setExam] = useState<Exam>({
+    examResult: [],
+  });
+  const [exams, setExams] = useState<string>();
   useEffect(() => {
-    const url = `${BASE}/exam/examname`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        const { examResult } = data.message;
-        setExams({
-          examResult,
-        });
+    urlcalling(`/exam/examname`, "GET").then((data) => {
+      const { examResult } = data.message;
+      console.log(examResult);
+      setExam({
+        examResult,
       });
+    });
   }, []);
   const submitImage = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("question", question!);
-    //formData.append("exam", exams!);
+    formData.append("exam", exams!);
     const BASE = process.env.REACT_APP_BASE_URL;
     await axios
       .post(`${BASE}/exam/questions`, formData, {
@@ -47,16 +47,17 @@ function UploadQuestion() {
         } else {
           alert("Some issue has occured");
         }
-      });
+      })
+      .catch((error) =>
+        alert("only image files with 2mb or pdf file with 5mb are are allowed")
+      );
   };
   const onInputChange = (e: any) => {
     setQuestion(e.target.files[0]);
   };
-
   return (
     <>
       <Navbar />
-
       <div className="containerexam hallticket">
         <div className="body">
           <h1>Upload Question paper</h1>
@@ -67,10 +68,10 @@ function UploadQuestion() {
                 <select
                   id="class1"
                   className="class11"
-                  //onChange={(e) => setExams(e.target.value)}
+                  onChange={(e) => setExams(e.target.value)}
                 >
                   <option value="">Select...</option>
-                  {exams?.examResult.map((option: exam) => (
+                  {exam?.examResult.map((option: exam) => (
                     <option key={option.id} value={option.id}>
                       {option.name}
                     </option>

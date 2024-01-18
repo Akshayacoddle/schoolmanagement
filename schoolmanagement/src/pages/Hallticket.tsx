@@ -23,27 +23,23 @@ function Hallticket() {
   const [selectedClassId, setSelectedClassId] = useState<number | string>();
   const [selectedExamType, setSelectedExamType] = useState<number | string>();
 
-  const BASE = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
-    const url = `${BASE}/exam/classid`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const { classIdResult, examTypeResult } = data.message;
-        dispatch(
-          setexamData({
-            classIdResult,
-            examTypeResult,
-          })
-        );
-      });
+    urlcalling(`/exam/classid`, "GET").then((data) => {
+      const { classIdResult, examTypeResult } = data.message;
+      dispatch(
+        setexamData({
+          classIdResult,
+          examTypeResult,
+        })
+      );
+    });
   }, []);
   const handlesubmit = async () => {
     const requestData = {
       classes: selectedClassId,
       examType: selectedExamType,
     };
-    urlcalling(`${BASE}/exam/hallTicket`, "POST", requestData).then((data) => {
+    urlcalling(`/exam/hallTicket`, "POST", requestData).then((data) => {
       if (!data.success) {
         alert("Some issue occurred");
       } else {

@@ -47,34 +47,31 @@ function Exam() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const BASE = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
-    const url = `${BASE}/exam/classid`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const {
+    urlcalling(`/exam/classid`, "GET").then((data) => {
+      const {
+        academicYearResult,
+        classIdResult,
+        examTypeResult,
+        roomIdResult,
+        subjectIdResult,
+      } = data.message;
+      dispatch(
+        setexamData({
           academicYearResult,
           classIdResult,
           examTypeResult,
           roomIdResult,
           subjectIdResult,
-        } = data.message;
-        dispatch(
-          setexamData({
-            academicYearResult,
-            classIdResult,
-            examTypeResult,
-            roomIdResult,
-            subjectIdResult,
-          })
-        );
-      });
+        })
+      );
+    });
   }, []);
 
   const handlesubmits = async () => {
-    const BASE = process.env.REACT_APP_BASE_URL;
-    urlcalling(`${BASE}/exam/shedule`, "POST", formData).then((data) => {
+    console.log(formData);
+
+    urlcalling(`/exam/shedule`, "POST", formData).then((data) => {
       if (!data.success) {
         alert("Some issue occurred");
       } else {

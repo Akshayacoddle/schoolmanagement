@@ -20,6 +20,8 @@ interface User {
   examName?: string | number;
   startDate?: string | number;
   endDate?: string | number;
+  examSubjectResult?: [];
+  studentHallticketResult?: [];
 }
 type ClassItem = {
   id: number;
@@ -42,17 +44,17 @@ type SubjectItem = {
   id: number;
   name: string;
 };
+const BASE = process.env.REACT_APP_BASE_URL;
+console.log(BASE);
 
-const urlcalling = async (url: string, method: string, data: User) => {
-  console.log(url);
-  const result = await fetch(url, {
+const urlcalling = async (url: string, method: string, data?: User) => {
+  const result = await fetch(`${BASE}${url}`, {
     method: method,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("jwttoken"),
     },
-
     body: JSON.stringify(data),
   });
   return result.json();
