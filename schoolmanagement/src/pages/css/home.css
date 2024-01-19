@@ -155,3 +155,21 @@ a.sigup, .login {
 .sideimg img {
     object-fit: contain;
 }
+.examtable {
+    display: flex;
+    margin: 50px 30px;
+    font-size: 23px;
+    gap: 25px;
+}
+.timetable select {
+    width: 240px;
+    padding: 6px;
+    font-size: 17px;
+}
+.timetable button {
+    padding: 7px 30px;
+    font-size: 17px;
+    background-color: #629b62;
+    color: white;
+    border: none;
+}

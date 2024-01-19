@@ -7,6 +7,7 @@ import Question from "./pages/UploadQuestion";
 import Hallticket from "./pages/Hallticket";
 import Feedback from "./pages/Feedback";
 import ViewHallticket from "./pages/ViewHallticket";
+import TimeTable from "./pages/TimeTable";
 
 const CURRENT_USER_TYPE = localStorage.getItem("role");
 
@@ -43,6 +44,7 @@ function App() {
           }
         />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/timetable" element={<TimeTable />} />
         <Route path="/admin" element={<LogIn />} />
         <Route path="*" element={<div>Page not found !</div>} />
       </Routes>
