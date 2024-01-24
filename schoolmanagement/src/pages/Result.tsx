@@ -2,38 +2,33 @@ import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import urlcalling from "../components/urlcalling";
-import { useDispatch, useSelector } from "react-redux";
 import { setexamData } from "../redux/redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
-type ExamTypeItem = {
-  id: number;
+type Marks = {
+  result: Results[];
+};
+type Results = {
+  name: string;
+  total_mark: number;
+  mark_obtained: number;
   type: string;
 };
-type Exams = {
-  examResult: Result[];
-};
-type Result = {
-  class_id: number;
-  name: string;
-  start_date: string;
-  end_date: string;
-};
-function TimeTable() {
+function Result() {
   const [selectedExam, setSelectedExam] = useState<number | string>();
   const examdata = useSelector((values: RootState) => values.exam.examData);
   const dispatch = useDispatch();
-  const [data, setData] = useState<Exams>();
+  const [data, setData] = useState<Marks>();
   function handlechange() {
-    console.log(selectedExam);
     if (!selectedExam) {
       alert("please select a exam");
     } else {
-      urlcalling(`/exam/viewExam?examType=${selectedExam}`, "GET").then(
+      urlcalling(`/student/examResult?examType=${selectedExam}`, "GET").then(
         (data) => {
-          const { examResult } = data.message;
-          setData({ examResult });
-          console.log(examResult);
+          const { result } = data;
+          setData({ result });
+          console.log(result);
         }
       );
     }
@@ -48,12 +43,10 @@ function TimeTable() {
       );
     });
   }, []);
-
   return (
     <>
       <Navbar />
-
-      <h2>Time Table</h2>
+      <h1>Result</h1>
       <div className="examtable">
         <div className="timetable">
           <label>Exam Type:</label>
@@ -66,7 +59,7 @@ function TimeTable() {
             }}
           >
             <option>select...</option>
-            {examdata?.examTypeResult.map((value: ExamTypeItem) => (
+            {examdata?.examTypeResult.map((value: any) => (
               <option key={value.id} value={value.id}>
                 {value.type}
               </option>
@@ -80,20 +73,19 @@ function TimeTable() {
       <table>
         <tr>
           <th>subject</th>
-          <th>Start Time</th>
-          <th>End Time</th>
+          <th>Total Mark</th>
+          <th>Mark Obtained</th>
         </tr>
-        {data?.examResult.map((option: any) => (
-          <tr key={option.name}>
+        {data?.result.map((option: any) => (
+          <tr key={option.mark_obtained}>
             <td>{option.name}</td>
-            <td>{option.start_date}</td>
-            <td>{option.end_date}</td>
+            <td>{option.total_mark}</td>
+            <td>{option.mark_obtained}</td>
           </tr>
         ))}
       </table>
-
       <Footer />
     </>
   );
 }
-export default TimeTable;
+export default Result;

@@ -49,15 +49,26 @@ function Feedback() {
   };
   const handlesubmits = () => {
     console.log(formData);
-    urlcalling(`/student/feedback`, "POST", formData).then((data) => {
-      console.log(data);
+    if (
+      !formData.name ||
+      !formData.classId ||
+      !formData.teacher ||
+      !formData.subject ||
+      !formData.aboutTeacher ||
+      !formData.aboutSchool
+    ) {
+      alert("please select a exam");
+    } else {
+      urlcalling(`/student/feedback`, "POST", formData).then((data) => {
+        console.log(data);
 
-      if (!data.success) {
-        alert("Some issue occurred");
-      } else {
-        alert("Success");
-      }
-    });
+        if (!data.success) {
+          alert("Some issue occurred");
+        } else {
+          alert("Success");
+        }
+      });
+    }
   };
   return (
     <>

@@ -26,6 +26,7 @@ td, th {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 200px;
 }
 .roomseat h3 {
     color: red;

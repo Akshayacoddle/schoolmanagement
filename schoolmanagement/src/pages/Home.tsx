@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Learn from "../images/learn.webp";
 import Lead from "../images/lead.jpg";
@@ -13,13 +13,31 @@ import Sports from "../images/sports.jpg";
 import Kindness from "../images/kindness.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import urlcalling from "../components/urlcalling";
+
+type Result = {
+  examResult: events[];
+};
+type events = {
+  name: string;
+  date: string;
+  location: string;
+  start_time: string;
+  end_time: string;
+  description: string;
+};
 
 function Home() {
   const navigate = useNavigate();
-
+  const [data, setData] = useState<Result>();
   useEffect(() => {
+    urlcalling(`/exam/events`, "GET").then((data) => {
+      const { examResult } = data.message;
+      setData({ examResult });
+    });
     if (!localStorage.getItem("jwttoken")) navigate("/login");
-  }, [navigate]);
+  }, []);
+  console.log(data);
 
   return (
     <>
@@ -152,6 +170,27 @@ function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="event-div">
+        <h2>Upcoming Events </h2>
+        <div className="event">
+          {data?.examResult.map((option: events) => (
+            <div className="divs" key={option.name}>
+              <div className="div-date">
+                <p>{option.date.split("-")[2]}</p>
+                <p className="day">{option.date.split("-")[1]}</p>
+                <p>{option.date.split("-")[0]}</p>
+              </div>
+              <div className="event-details">
+                <p className="event-header" key={option.name}>
+                  {option.name}
+                </p>
+                <p key={option.location}>{option.location}</p>
+                <p key={option.description}>{option.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <div className="forth">

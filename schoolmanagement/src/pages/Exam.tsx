@@ -48,24 +48,28 @@ function Exam() {
     setFormData({ ...formData, [name]: value });
   };
   useEffect(() => {
-    urlcalling(`/exam/classid`, "GET").then((data) => {
-      const {
-        academicYearResult,
-        classIdResult,
-        examTypeResult,
-        roomIdResult,
-        subjectIdResult,
-      } = data.message;
-      dispatch(
-        setexamData({
+    urlcalling(`/exam/classid`, "GET")
+      .then((data) => {
+        const {
           academicYearResult,
           classIdResult,
           examTypeResult,
           roomIdResult,
           subjectIdResult,
-        })
-      );
-    });
+        } = data.message;
+        dispatch(
+          setexamData({
+            academicYearResult,
+            classIdResult,
+            examTypeResult,
+            roomIdResult,
+            subjectIdResult,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handlesubmits = async () => {

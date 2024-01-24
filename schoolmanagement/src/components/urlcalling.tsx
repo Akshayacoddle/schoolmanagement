@@ -22,12 +22,26 @@ interface User {
   endDate?: string | number;
   examSubjectResult?: [];
   studentHallticketResult?: [];
+  examResult?: events[];
+  result?: Results[];
 }
+type Results = {
+  name: string;
+  total_mark: number;
+  mark_obtained: number;
+  type: string;
+};
 type ClassItem = {
   id: number;
   grade: string;
 };
-
+type events = {
+  name: string;
+  date: string;
+  location: string;
+  start_time: string;
+  end_time: string;
+};
 type ExamTypeItem = {
   id: number;
   type: string;

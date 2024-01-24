@@ -14,6 +14,7 @@ const withConditionalNavItems = (WrappedComponent: any) => {
             Feedback: "/feedback",
             "View Hall Ticket": "/view",
             "Exam Timetable": "/timetable",
+            Result: "/result",
           };
     return <WrappedComponent navItems={navItems} />;
   };
