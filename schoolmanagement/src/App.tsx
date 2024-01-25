@@ -9,8 +9,7 @@ import Feedback from "./pages/Feedback";
 import ViewHallticket from "./pages/ViewHallticket";
 import TimeTable from "./pages/TimeTable";
 import Result from "./pages/Result";
-
-const CURRENT_USER_TYPE = localStorage.getItem("role");
+import { AdminElement, UserElement } from "./components/RBAC";
 
 function App() {
   return (
@@ -19,8 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/view" element={<ViewHallticket />} />
-        <Route path="/result" element={<Result />} />
+        <Route path="/admin" element={<LogIn />} />
+        <Route path="*" element={<div>Page not found !</div>} />
         <Route
           path="/exam"
           element={
@@ -45,27 +44,41 @@ function App() {
             </AdminElement>
           }
         />
-        <Route path="/feedback" element={<Feedback />} />
-        <Route path="/timetable" element={<TimeTable />} />
-        <Route path="/admin" element={<LogIn />} />
-        <Route path="*" element={<div>Page not found !</div>} />
+        <Route
+          path="/feedback"
+          element={
+            <UserElement>
+              <Feedback />
+            </UserElement>
+          }
+        />
+        <Route
+          path="/timetable"
+          element={
+            <UserElement>
+              <TimeTable />
+            </UserElement>
+          }
+        />
+        <Route
+          path="/view"
+          element={
+            <UserElement>
+              <ViewHallticket />
+            </UserElement>
+          }
+        />
+        <Route
+          path="/result"
+          element={
+            <UserElement>
+              <Result />
+            </UserElement>
+          }
+        />
       </Routes>
     </div>
   );
 }
-interface Element {
-  children: React.ReactNode;
-}
 
-function AdminElement({ children }: Readonly<Element>) {
-  if (CURRENT_USER_TYPE === "admin") {
-    return <>{children}</>;
-  } else {
-    return (
-      <div>
-        <h1>You don't have permission to access</h1>
-      </div>
-    );
-  }
-}
 export default App;

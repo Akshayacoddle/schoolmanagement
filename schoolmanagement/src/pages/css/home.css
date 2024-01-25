@@ -213,3 +213,13 @@ p.event-header {
     color: #889172;
     font-style: italic;
 }
+.user-profile {
+    text-align: center;
+    right: 0;
+    padding: 50px 50px 302px 50px;
+    background-color: rgb(44 46 47);
+    color: rgb(249, 244, 244);
+    position: fixed;
+    z-index: 2;
+    opacity: 0.7;
+}

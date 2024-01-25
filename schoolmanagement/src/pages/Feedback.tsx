@@ -57,7 +57,7 @@ function Feedback() {
       !formData.aboutTeacher ||
       !formData.aboutSchool
     ) {
-      alert("please select a exam");
+      alert("please fill the form before submiting");
     } else {
       urlcalling(`/student/feedback`, "POST", formData).then((data) => {
         console.log(data);
