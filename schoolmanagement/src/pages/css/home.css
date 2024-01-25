@@ -1,0 +1,225 @@
+
+.home_div{
+    position: relative;
+    display: flex;
+    background-image: url(../../images/home.jpg);
+    background-size: cover;
+    height: 550px;
+    z-index: 0;
+
+}
+.head{
+    margin: auto;
+    z-index: 1;
+    width: 600px;
+    text-align: center;  
+    color: #ffffff;
+}
+.home_div h1 {
+    
+    z-index: 1;
+    font-size: 3rem;
+}
+
+.overlap{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000000;
+    opacity: .4;
+
+}
+.home_div p {
+    margin: auto;
+    width: 600px;
+    text-align: center;
+}
+.second {
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 300px;
+    gap: 25px;
+    padding: 80px 80px 0px;
+}
+.second-division {
+    background-color: rgb(101 128 36 / 79%);
+    text-align: center;
+}
+.third {
+    margin: auto;
+    padding: 80px 80px 0px;
+}
+.content {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 36px;
+}
+.thirdhead h2 {
+    font-size: 31px;
+    color: #525d92;
+    text-align: center;
+}
+.define h3 {
+    font-size: 21px;
+    color: #437bcadb;
+}
+.thirdcontent {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 20px;
+}
+.forth {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 80px 80px 80px;
+    gap: 25px;
+}
+.forthdiv img {
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+}
+.thirdimg img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.thirdimg {
+    height: 70px;
+    align-self: center;
+}
+.forthdiv h3 {
+    text-align: center;
+}
+.thirdhead p {
+    font-size: 20px;
+    padding: 0 200px;
+    color: #444447;
+}
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin: 0 150px;
+}
+footer {
+    margin-top: 75px;
+    background-color: rgb(72 107 118);
+    color: white;
+}
+.icons {
+    width: 40px;
+    display: flex;
+    gap: 15px;
+    padding-top: 22px;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+.hallticket {
+    margin-top: 66px;
+}
+.examdiv .class11 {
+    padding: 10px;
+    font-size: 17px;
+}
+.examdiv .btn {
+    background-color: #468e46bf;
+    color: white;
+    padding: 10px;
+}
+a.sigup, .login {
+    margin: auto;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    width: 100%;
+    border: solid 2px white;
+    padding: 6px 0px;
+}
+.linkselect {
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 402px;
+    margin: auto;
+}
+.sideimg h1 {
+    margin: 0px;
+    text-align: center;
+}
+.sideimg img {
+    object-fit: contain;
+}
+.examtable {
+    display: flex;
+    margin: 50px 30px;
+    font-size: 23px;
+    gap: 25px;
+}
+.timetable select {
+    width: 240px;
+    padding: 6px;
+    font-size: 17px;
+}
+.timetable button {
+    padding: 7px 30px;
+    font-size: 17px;
+    background-color: #629b62;
+    color: white;
+    border: none;
+}
+.event {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.div-date {
+    background-color: #689e68;
+    width: 100px;
+    height: 106px;
+    text-align: center;
+    margin: 0px 0px 10px 0px;
+}
+.divs {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.event-div {
+    padding: 50px 100px;
+    border: 4mm ridge rgb(63 141 151);
+    margin: 80px 80px;
+    
+}
+p.day {
+    font-size: 27px;
+}
+.div-date * {
+    color: white;
+    margin: 6px;
+}
+.event-details * {
+    margin: 5px;
+}
+.event-div h2 {
+    text-align: center;
+}
+p.event-header {
+    font-size: 22px;
+    color: #889172;
+    font-style: italic;
+}
+.user-profile {
+    text-align: center;
+    right: 0;
+    padding: 50px 50px 302px 50px;
+    background-color: rgb(44 46 47);
+    color: rgb(249, 244, 244);
+    position: fixed;
+    z-index: 2;
+    opacity: 0.7;
+}
